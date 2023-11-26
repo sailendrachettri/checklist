@@ -223,13 +223,13 @@ function uncheckedForNewDay() {
     complectedTask.innerHTML = complectedTaskCount;
 
     saveData();
+    scheduleAt3AM();
 }
 
-/*
 
 function scheduleAt3AM() {
     let now = new Date();
-    let millisTill3PM = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 3, 0, 0, 0) - now;
+    let millisTill3PM = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 11, 59, 0, 0) - now;
     if (millisTill3PM < 0) {
         // If it's already past 9:14 PM, schedule for tomorrow
         millisTill3PM += 86400000; // 24 hours in milliseconds
@@ -239,7 +239,6 @@ function scheduleAt3AM() {
 
 // Start the scheduling
 scheduleAt3AM();
-*/
 
 //------------------------------ DELETE EVERYTHING------------------------------
 // delete everyting the from local storage - emergency reset button

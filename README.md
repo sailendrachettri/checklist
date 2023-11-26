@@ -41,6 +41,7 @@ Start the Server
 - Mark as done you task
 - It displays the random fact in every 5 seconds
 - It saves your task in the browser's local storage
+- Added categories for Today, This week and This month
 
 # New Feature Ideas
 - Task created date and time
