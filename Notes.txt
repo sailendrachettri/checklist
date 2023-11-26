@@ -1,0 +1,7 @@
+pushing to master branch not main
+
+TODO:
+- write readme file for this application
+DONE - create a button that clear all local storage data incase of emergency reboot (localStorage.clear())
+- Make moveable list element up and down
+- Add default task if no task is left

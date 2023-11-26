@@ -1,0 +1,29 @@
+@media only screen and (max-width: 400px) {
+    ul li {
+        font-size: 14px;
+    }
+
+    .todo-app .quote {
+        margin: 0;
+    }
+
+    .todo-app {
+        padding: 40px 1.5rem 66px;
+    }
+
+    input {
+        width: 50%;
+    }
+
+    .row {
+        padding-left: 0;
+    }
+
+    button {
+        padding: 8px 2rem;
+    }
+
+    #newDay button {
+        padding: 5px 1rem;
+    }
+}

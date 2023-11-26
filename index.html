@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="./images/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="./images/favicon_io/site.webmanifest">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    <title>Sailendrz Chettriz</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="todo-app">
+            <div id="date">
+                <small><span id="dateAndTime"></span></small>
+            </div>
+
+            <div id="countTask">
+                <p id="allWorkDoneInfo"> Today: <span id="complectedTask">0</span> of <span id="totalTask">0</span>
+                    complected
+                </p>
+            </div>
+
+            <h2>Sailendrz Chettriz<img src="/images/dp.png" alt="Icon">
+            </h2>
+            <p class="quote" id="displayQuote"></p>
+
+            <div class="row">
+                <small>
+                    <select id="taskForWhen">
+                        <option value="today">Today</option>
+                        <option value="thisWeek">This Week</option>
+                        <option value="thisMonth">This Month</option>
+                    </select>
+                </small>
+                <input type="text" id="input-box" placeholder="Add your list of tasks">
+                <button onclick="addTask()">Add</button>
+            </div>
+            <section id="todaysTask">
+                <h3>Today</h3>
+                <!-- <p id="defaultTodayText">yay! all task complected</p> -->
+                <ul id="list-container-today">
+                </ul>
+            </section>
+            <section id="thisWeeksTask">
+                <h3>This Week</h3>
+                <!-- <p id="defaultWeekText">yay! all task complected</p> -->
+                <ul id="list-container-week">
+                </ul>
+            </section>
+            <section id="thisMonthsTask">
+                <h3>This Month</h3>
+                <!-- <p id="defaultMonthText">yay! all task complected</p> -->
+                <ul id="list-container-month">
+                </ul>
+            </section>
+            <div id="newDay">
+                <button type="reset" id="resetBtn1" onclick="uncheckedForNewDay()">Unchecked</button>
+                <button type="reset" id="resetBtn2" onclick="deleteEverything()">Erase</button>
+            </div>
+        </div>
+    </div>
+    <script src="/js/script.js"></script>
+    <script src="/js/factData.js"></script>
+    <script src="/js/Date.js"></script>
+</body>
+
+</html>
