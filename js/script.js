@@ -9,12 +9,13 @@ let complectedTaskCount = 0;
 const listContainerForToday = document.getElementById('list-container-today')
 const listContainerForWeek = document.getElementById('list-container-week')
 const listContainerForMonth = document.getElementById('list-container-month')
+const listContainerForUpcoming = document.getElementById('list-container-upcoming')
 let taskForWhen = document.getElementById('taskForWhen');
 
 // ------------------------------DEAFAULT TEXTS------------------------------
-let defaultTodayText = document.getElementById('defaultTodayText');
-let defaultWeekText = document.getElementById('defaultWeekText');
-let defaultMonthText = document.getElementById('defaultMonthText');
+// let defaultTodayText = document.getElementById('defaultTodayText');
+// let defaultWeekText = document.getElementById('defaultWeekText');
+// let defaultMonthText = document.getElementById('defaultMonthText');
 
 
 function addTask() {
@@ -23,7 +24,7 @@ function addTask() {
     }
     else {
         // Seperation of task for day, week and Month
-        console.log(taskForWhen.value);
+        // console.log(taskForWhen.value);
 
         if (taskForWhen.value == 'today') {
             // -------------------FOR TODAY-------------------
@@ -37,10 +38,9 @@ function addTask() {
             span.innerHTML = "\u00d7"
             li.appendChild(span)
 
-            // save in local storage - block and none 
-            // if (listContainerForToday.children.length >= 1) {
-            //     defaultTodayText.style.display = 'none';
-            // }
+            // increment the total number of task when user add one by one
+            totalTaskCount++;
+            totalTask.innerHTML = totalTaskCount;
 
         } else if (taskForWhen.value == 'thisWeek') {
             // ------------------FOR THIS WEEK------------------
@@ -75,13 +75,21 @@ function addTask() {
             //     console.log("None");
             // }
 
-        } else {
-            alert("Please select the task's schedule");
+        } else if (taskForWhen.value == 'upcomingEvents') {
+            // --------------FOR THIS MONTH--------------
+            let li = document.createElement("li")
+            li.innerHTML = inputBox.value
+            listContainerForUpcoming.appendChild(li)
+
+            // create X icon
+            let span = document.createElement('span')
+            span.innerHTML = "\u00d7"
+            li.appendChild(span)
         }
 
-        // increment the total number of task when user add one by one
-        totalTaskCount++;
-        totalTask.innerHTML = totalTaskCount;
+        else {
+            alert("Please select the task's schedule");
+        }
     }
     inputBox.value = ""
     saveData()
@@ -125,31 +133,35 @@ listContainerForToday.addEventListener('click', function (e) {
     }
 }, false)
 
-listContainerForWeek.addEventListener('click', function (e) {
+listContainerForUpcoming.addEventListener('click', function (e) {
     if (e.target.tagName === 'LI') {
+        // whe the task is complete the remove it in 2 seconds
         e.target.classList.toggle('checked')
+        setTimeout(() => {
+            e.target.remove()
+            saveData()
+        }, 4000);
 
-        if (e.target.className == 'checked') {
-            setTimeout(() => {
-                e.target.remove()
-                saveData()
-            }, 2000);
-
-            // decrement the total task one by one
-            totalTaskCount--;
-            totalTask.innerHTML = totalTaskCount;
-
-        }
         saveData()
     }
     else if (e.target.tagName === 'SPAN') {
-        totalTaskCount--;
-        totalTask.innerHTML = totalTaskCount;
+        e.target.parentElement.remove()
+        saveData()
+    }
+}, false)
 
-        if (e.target.parentElement.className) {
-            complectedTaskCount--;
-            complectedTask.innerHTML = complectedTaskCount;
-        }
+listContainerForWeek.addEventListener('click', function (e) {
+    if (e.target.tagName === 'LI') {
+        // whe the task is complete the remove it in 2 seconds
+        e.target.classList.toggle('checked')
+        setTimeout(() => {
+            e.target.remove()
+            saveData()
+        }, 2000);
+
+        saveData()
+    }
+    else if (e.target.tagName === 'SPAN') {
         e.target.parentElement.remove()
         saveData()
     }
@@ -164,21 +176,10 @@ listContainerForMonth.addEventListener('click', function (e) {
                 e.target.remove()
                 saveData()
             }, 5000);
-
-            // decrement the total task one by one
-            totalTaskCount--;
-            totalTask.innerHTML = totalTaskCount;
         }
         saveData()
     }
     else if (e.target.tagName === 'SPAN') {
-        totalTaskCount--;
-        totalTask.innerHTML = totalTaskCount;
-
-        if (e.target.parentElement.className) {
-            complectedTaskCount--;
-            complectedTask.innerHTML = complectedTaskCount;
-        }
         e.target.parentElement.remove()
         saveData()
     }
