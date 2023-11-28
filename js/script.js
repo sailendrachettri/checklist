@@ -8,7 +8,6 @@ let complectedTaskCount = 0;
 // ------------------------------Task Seperation------------------------------
 const listContainerForToday = document.getElementById('list-container-today')
 const listContainerForWeek = document.getElementById('list-container-week')
-const listContainerForMonth = document.getElementById('list-container-month')
 const listContainerForUpcoming = document.getElementById('list-container-upcoming')
 let taskForWhen = document.getElementById('taskForWhen');
 
@@ -23,7 +22,7 @@ function addTask() {
         alert("You must write something")
     }
     else {
-        // Seperation of task for day, week and Month
+        // Seperation of task for day, week and upcoming events 
         // console.log(taskForWhen.value);
 
         if (taskForWhen.value == 'today') {
@@ -52,31 +51,10 @@ function addTask() {
             // create X icon
             let span = document.createElement('span')
             span.innerHTML = "\u00d7"
-            li.appendChild(span)
-
-            // console.log(listContainerForWeek.children.length);
-            // if (listContainerForWeek.children.length >= 1) {
-            //     defaultWeekText.style.display = 'none';
-            // }
-
-        } else if (taskForWhen.value == 'thisMonth') {
-            // --------------FOR THIS MONTH--------------
-            let li = document.createElement("li")
-            li.innerHTML = inputBox.value
-            listContainerForMonth.appendChild(li)
-
-            // create X icon
-            let span = document.createElement('span')
-            span.innerHTML = "\u00d7"
-            li.appendChild(span)
-
-            // if (listContainerForMonth.children.length >= 1) {
-            //     defaultMonthText.style.display = 'none';
-            //     console.log("None");
-            // }
+            li.appendChild(span);
 
         } else if (taskForWhen.value == 'upcomingEvents') {
-            // --------------FOR THIS MONTH--------------
+            // --------------FOR THIS upcoming events--------------
             let li = document.createElement("li")
             li.innerHTML = inputBox.value
             listContainerForUpcoming.appendChild(li)
@@ -167,31 +145,13 @@ listContainerForWeek.addEventListener('click', function (e) {
     }
 }, false)
 
-listContainerForMonth.addEventListener('click', function (e) {
-    if (e.target.tagName === 'LI') {
-        e.target.classList.toggle('checked')
-
-        if (e.target.className == 'checked') {
-            setTimeout(() => {
-                e.target.remove()
-                saveData()
-            }, 5000);
-        }
-        saveData()
-    }
-    else if (e.target.tagName === 'SPAN') {
-        e.target.parentElement.remove()
-        saveData()
-    }
-}, false)
-
 
 // saving the data to local Storage
 
 function saveData() {
     localStorage.setItem('data1', listContainerForToday.innerHTML)
     localStorage.setItem('data2', listContainerForWeek.innerHTML)
-    localStorage.setItem('data3', listContainerForMonth.innerHTML)
+    localStorage.setItem('data3', listContainerForUpcoming.innerHTML)
     localStorage.setItem('cTask', complectedTask.innerHTML);
     localStorage.setItem('tTask', totalTask.innerHTML);
 }
@@ -201,7 +161,7 @@ function saveData() {
 function showTask() {
     listContainerForToday.innerHTML = localStorage.getItem('data1')
     listContainerForWeek.innerHTML = localStorage.getItem('data2')
-    listContainerForMonth.innerHTML = localStorage.getItem('data3')
+    listContainerForUpcoming.innerHTML = localStorage.getItem('data3')
     complectedTask.innerHTML = localStorage.getItem('cTask')
     totalTask.innerHTML = localStorage.getItem('tTask')
 }
@@ -224,22 +184,22 @@ function uncheckedForNewDay() {
     complectedTask.innerHTML = complectedTaskCount;
 
     saveData();
-    scheduleAt3AM();
+    scheduleAt12NooN();
 }
 
 
-function scheduleAt3AM() {
+function scheduleAt12NooN() {
     let now = new Date();
-    let millisTill3PM = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 11, 59, 0, 0) - now;
-    if (millisTill3PM < 0) {
+    let millisTill12NooN = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 11, 59, 0, 0) - now;
+    if (millisTill12NooN < 0) {
         // If it's already past 9:14 PM, schedule for tomorrow
-        millisTill3PM += 86400000; // 24 hours in milliseconds
+        millisTill12NooN += 86400000; // 24 hours in milliseconds
     }
-    setTimeout(uncheckedForNewDay, millisTill3PM);
+    setTimeout(uncheckedForNewDay, millisTill12NooN);
 }
 
 // Start the scheduling
-scheduleAt3AM();
+scheduleAt12NooN();
 
 //------------------------------ DELETE EVERYTHING------------------------------
 // delete everyting the from local storage - emergency reset button
