@@ -190,7 +190,7 @@ function uncheckedForNewDay() {
 
 function scheduleAt12NooN() {
     let now = new Date();
-    let millisTill12NooN = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 11, 59, 0, 0) - now;
+    let millisTill12NooN = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 11, 0, 0, 0) - now;
     if (millisTill12NooN < 0) {
         // If it's already past 9:14 PM, schedule for tomorrow
         millisTill12NooN += 86400000; // 24 hours in milliseconds
